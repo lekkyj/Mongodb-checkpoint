@@ -1,1 +1,62 @@
+ Create a Database and Collection
+In MongoDB shell or terminal:
 
+js
+Copy
+Edit
+use contact
+db.createCollection("contactlist")
+2. Insert Documents into "contactlist"
+js
+Copy
+Edit
+db.contactlist.insertMany([
+  { last_name: "Ben", first_name: "Moris", email: "ben@gmail.com", age: 26 },
+  { last_name: "Kefi", first_name: "Seif", email: "kefi@gmail.com", age: 15 },
+  { last_name: "Emilie", first_name: "brouge", email: "emilie.b@gmail.com", age: 40 },
+  { last_name: "Alex", first_name: "brown", age: 4 },
+  { last_name: "Denzel", first_name: "Washington", age: 3 }
+])
+3. Display All Contacts
+js
+Copy
+Edit
+db.contactlist.find().pretty()
+4. Display One Person by ID
+Find the ID first (from previous output), then use:
+
+js
+Copy
+Edit
+db.contactlist.findOne({ _id: ObjectId("PUT_OBJECT_ID_HERE") })
+5. Display Contacts with Age > 18
+js
+Copy
+Edit
+db.contactlist.find({ age: { $gt: 18 } }).pretty()
+6. Display Contacts with Age > 18 and First Name Contains "ah"
+js
+Copy
+Edit
+db.contactlist.find({
+  age: { $gt: 18 },
+  first_name: /ah/i
+}).pretty()
+7. Update "Kefi Seif" to "Kefi Anis"
+js
+Copy
+Edit
+db.contactlist.updateOne(
+  { last_name: "Kefi", first_name: "Seif" },
+  { $set: { first_name: "Anis" } }
+)
+8. Delete Contacts Aged Under 5
+js
+Copy
+Edit
+db.contactlist.deleteMany({ age: { $lt: 5 } })
+9. Display All Contacts Again
+js
+Copy
+Edit
+db.contactlist.find().pretty()
